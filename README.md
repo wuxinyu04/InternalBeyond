@@ -2,12 +2,14 @@
 
 一个离线运行的单文件个人网站项目，支持同时对接多个 AI 模型。
 
-该项目包含十大功能模块与两套视觉主题。所有数据储存在本地，不依赖任何网络服务器。
+该项目包含11个核心功能模块与两套视觉主题。所有数据储存在本地，不依赖任何网络服务器。
 
-个人资料、角色立绘、系统提示词等均可自定义。
+个人资料、角色立绘、系统提示词等均可自定义，用户数据支持一键导出与导入。
 
-**本项目为Sui/水独立设计开发的自用前端，永久免费开源。**
+**本项目永久免费开源。**
 
+
+---
 
 ## ✦ 开始游戏
 
@@ -22,16 +24,17 @@
 
 | 模块 | 说明 |
 |------|------|
-| **Room** | 像素互动房间（1672×941），含作者对话、茶歇、互动故事、塔罗占卜、换装、休息六个子模块 |
-| **Chat** | 多端口 AI 实时对话 — 浮动面板 + 全屏 + 群聊 + 图像生成 + 附件处理 + 语音输入 |
+| **Room** | 像素互动房间（1672×941），含 Sui 对话、茶歇、互动故事、塔罗占卜、换装、休息六个子模块 |
+| **Chat** | 多端口 AI 实时对话 — 浮动面板 + 全屏 + 群聊 + 图像生成 + 附件处理 + Token 仪表盘 |
+| **Calendar** | AI 日历 — 悬浮小窗 + 挂历视窗，纪念日 / 生日 / 计划 / 记录，月相节气与传统节日，AI 读取临近日程、聊天中提起并留便笺 |
 | **Blog** | 日志 / 密码日记本 / AI 评论 / AI 批注 / 自定义剧本 |
-| **Letters** | AI 书信 — 异步通信，接收AI的信件 |
-| **Memory** | 永久记忆库 — 星图可视化 + 语义检索 + API 上下文自动注入 + Auto Memory |
-| **Music** | 本地音乐播放器 + 频率可视化波形 |
+| **Letters** | AI 书信 — 异步通信，AI 读取你的资料后写回信 |
+| **Memory** | 长期情感记忆库 — 星图可视化 + 自然衰减 + API 上下文自动注入 + Auto Memory（AI 自主记忆） |
+| **Music** | 本地音乐播放器 + 48 条频率可视化波形 |
 | **Profile** | 液态玻璃风格个人名片 — 头像 + 简介 + 作品集 |
 | **API** | 多端口配置中心 — 最多 10 个独立 API，各有昵称、关系与提示词 |
 | **ICode** | AI 代码工作区 — 文件管理 + 预览 + 内联编辑 + 搜索定位 + 脚本沙箱运行 + 文档生成（DOCX / PDF / XLSX） |
-| **DIY** | 自定义立绘、占卜桌布、外部工具、MCP 服务器、后端连接、沙箱扩展与文件解析库 |
+| **DIY** | 自定义透明立绘、占卜桌布、外部工具、MCP 服务器、沙箱扩展与文件解析库 |
 
 ## ✦ 主题系统
 
@@ -60,10 +63,19 @@
 浮动面板与全屏模式。好友列表由 API 配置自动生成，支持群聊与话题频道。思考链显示、消息删除、历史搜索、日历视图。可一键生成记忆到 Memory。
 
 - **话题频道**：每个好友下可新建多个话题频道，各频道独立聊天记录。频道的聊天记录不会被 Letters、Blog 评论等模块读取。
-- **语音输入**：在API设置页设置语音模型后可以开启语音输入与识别。
+- **对话摘要**：开启后旧消息自动压缩为摘要注入上下文，保持长对话的连贯性。
 - **图像生成**：每个 API 可独立开启。开启后 AI 可在对话中生成图片，图片直接显示在聊天里并自动存入 ICode。仅 OpenAI 兼容与 Gemini 接口支持。
 - **Token 仪表盘**：汇总用量，含缓存命中率、模型明细、费用估算。支持按时间段查看和清除。
 - **提示缓存（Prompt Caching）**：自动优化缓存命中率以降低输入费用，默认开启。支持长效缓存（1 小时 TTL，仅 Anthropic 官方 API）。
+
+### Calendar — AI 日历
+
+悬浮小窗随站点载入出现在右上角（可拖拽，双击展开完整视窗，可在设置中关闭常驻），另有右下角组合按钮与 Chat 侧栏两个入口。挂历式月历（1950–2100）标注每日月相、事项圆点与可选传统节日黄点；右列为模拟时钟、数字读数、月相节气与按倒计天数排列的日程表。
+
+- **事项**：纪念日 / 生日 / 计划 / 记录四类。重复方式支持每年 / 每月 / 每周（星期可多选）/ 每天 / 单次；计划与记录可设结束日期；31 日与 2 月 29 日的重复在短月自动落到当月最后一天。可见范围可选公开、指定一位或多位 AI、仅自己，可附 30 字备注。已建事项可随时点行卡「✎」编辑。
+- **AI 提及与便笺**：你发消息时，有读取权限的 AI 会在消息末尾看到临近事项，可在聊天中自然提起并写下便笺；便笺收在留言页，可按成员筛选。提醒不是系统通知，站点关闭时不会弹窗。
+- **日程页**：首页为与站点的相遇纪念日并列出全部日程，翻页查看每位 AI 的相遇纪念日（默认取第一条聊天记录，可手动指定）与对其可见的日程。
+- **设置**：日历接入总开关、逐位读取 / 留言权限、传统节日与花瓣特效开关。数据存于本地 IndexedDB，包含在全站导出与备份中；群聊不接入日历。
 
 ### Blog — 日志系统
 
@@ -126,7 +138,7 @@ IB 支持多种 AI 服务（最多 10 个端口）：
 
 ## ✦ 数据管理
 
-- **导出**：导航栏 Export → 全部数据导出为 JSON 文件（日志、分类、信件、聊天记录、话题频道、对话摘要、Blog 评论与批注、API 配置、个人资料、群组设置、记忆库、Auto Memory 档案、ICode 项目与上传文件）。Memory 另支持独立导入导出。
+- **导出**：导航栏 Export → 全部数据导出为 JSON 文件（日志、分类、信件、聊天记录、话题频道、对话摘要、Blog 评论与批注、API 配置、个人资料、群组设置、记忆库、Auto Memory 档案、ICode 项目与上传文件、日历事项 / 便笺与设置）。Memory 另支持独立导入导出。
 - **导入**：Import → 选择 JSON 备份文件，增量合并不覆盖。
 - **归档**：删除 API 时可选择归档而非彻底删除，密钥清除但聊天记录与 Auto Memory 档案保留，随时可恢复。归档区上限 20 个。
 - **存储**：浏览器 IndexedDB，完全离线。
@@ -155,16 +167,16 @@ game/
 ## ✦ 技术规格
 
 - **架构**：纯前端单文件 HTML + 独立游戏引擎 JS。无框架、无构建、无服务器。
-- **字体**：Cormorant Garamond · Noto Sans SC · Noto Serif SC · Raleway · Great Vibes · Spectral（Google Fonts CDN）。
+- **字体**：Cormorant Garamond · Noto Sans SC · Noto Serif SC · Raleway · Great Vibes · Pinyon Script · Spectral（Google Fonts CDN）。
 - **视觉**：CSS 玻璃拟态、Canvas 雨滴（45 滴）与水波纹、棱镜光影、烛火月光、浮动微尘、交叉溶解过渡。
 - **AI 协议**：Anthropic 原生格式 + OpenAI 兼容格式，覆盖官方及中转站 API。
-- **构建**：Claude (Opus 4.6) 构建 · Opus 4.8 / Sonnet 4.6 / Fable 5 参与辅助构建 · GPT-IMAGE-2 贴图 · Adobe Photoshop CS 设计编绘。
+- **构建**：Claude (Opus 4.6) 构建 · Opus 4.8 / Sonnet 4.6 / Fable 5 / Opus 5 / ChatGPT 5.6 Sol 参与辅助构建 · GPT-IMAGE-2 贴图 · Adobe Photoshop CS 设计编绘。
 
 ---
 
 ## ✦ Introduction (EN)
 
-**Internal Beyond** is a fully offline, single-file personal website with multi-AI support. Ten modules, two visual themes, all data stored locally. Free and open source.
+**Internal Beyond** is a fully offline, single-file personal website with multi-AI support. Eleven modules, two visual themes, all data stored locally. Free and open source.
 
 Connect your own AI API keys to unlock all interactive features. Supports Claude, GPT, DeepSeek, Gemini, and custom relay endpoints.
 
@@ -172,6 +184,7 @@ Connect your own AI API keys to unlock all interactive features. Supports Claude
 
 - **Room** — Pixel-art interactive room with six sub-modules: Sui (host dialogue + guided tour), Tea (25-combo atmosphere system), Story (branching narrative engine), Tarot (78-card deck + AI readings), Wardrobe (6 outfits), Sleep. Includes Mini pet window mode.
 - **Chat** — Multi-API conversations with floating panel, fullscreen, group chat, topic channels, thinking chain, conversation summary, image generation, attachment handling, Token dashboard, prompt caching, and memory generation.
+- **Calendar** — AI-readable calendar with floating widget and full window: anniversaries, birthdays, plans and records, moon phases and solar terms, per-AI visibility, in-chat mentions and notes.
 - **Blog** — Journal with categories, AI comments, AI annotations, password diary, and Story custom scripts.
 - **Letters** — Asynchronous AI correspondence.
 - **Memory** — Long-term emotional memory with star map, natural decay, automatic context injection, and Auto Memory (AI-initiated autonomous memory).
@@ -199,12 +212,20 @@ Connect your own AI API keys to unlock all interactive features. Supports Claude
 - 小红书：3628686381
 - Bilibili：[主页](https://space.bilibili.com/3546561346800463)
 
-## ✦ 版权声明
+## ✦ 许可与版权
 
-© 2025-2026 Sui. All rights reserved.
+© 2025–2026 Sui. Internal Beyond 在 GitHub 公开源代码，并免费供个人、学习、研究及其他非商业用途使用。公开源代码不等于放弃版权，也不授权商业使用或二次贩卖。
 
-本项目为个人创作作品，代码和设计均为原创。欢迎下载使用，请勿用于商业用途或二次贩卖。
+- 程序代码：PolyForm Noncommercial License 1.0.0
+- 视觉素材与项目文档：在作者有权授权的范围内采用 CC BY-NC-SA 4.0
+- 项目名称、Logo 与作者标识：保留相关权利，不授权冒充官方版本
 
-所有角色精灵图、场景素材由 Sui 设计制作。本项目使用 Anthropic Claude (Opus 4.6) 进行开发构建，Claude (Opus 4.8)、Claude (Sonnet 4.6) 与 Claude Fable 5 辅助编程，部分贴图由 OpenAI GPT-IMAGE-2 生成，界面设计与编绘使用 Adobe Photoshop CS。AI 工具为辅助创作工具，不对项目内容拥有版权。本声明适用于项目的所有版本与衍生形式。
+项目图像素材由 OpenAI GPT-IMAGE-2 生成，并由 Sui 使用 Adobe Photoshop CS 进行修改、合成、界面设计与编绘。
 
-**如果你通过付费方式获得了本项目，你所购买的不是正版。** 请通过上方联系方式获取免费正版。
+允许在保留署名和许可文件的前提下进行非商业使用、修改与分享。未经 Sui 书面授权，不得出售、收费分发、打包进付费产品或服务、商业托管、收费部署或以其他方式获取商业利益。
+
+本项目使用 Anthropic Claude (Opus 4.6) 进行开发构建，Anthropic Claude (Fable 5)、Claude (Opus 4.8)、Claude (Sonnet 4.6)、Claude (Opus 5)、ChatGPT (5.6 Sol) 亦参与了编程工作。AI 工具为辅助创作工具，不对项目内容拥有版权。本声明适用于项目的所有版本与衍生形式。第三方服务名称与商标归各自权利人所有。
+
+完整条款见根目录 `LICENSE` 与 `LICENSES/` 文件夹。商业授权联系：1282901880@qq.com。
+
+**本项目官方版本免费提供。** 如果你通过付费方式获得了未经作者授权的副本，请停止传播，并通过上方联系方式获取免费正版。
